@@ -26,6 +26,12 @@ devtools::install_github("Glenn032787/quickGraph")
 
 This is basic usage of the function of plotLinearModel.
 
+    @param data Data set in form of tibble that is being plotted (Must have at least three valid row)
+    @param x Column in data that is the x axis of plot (Name of column X should be character (in quotes) and data in column x should be numeric)
+    @param y Column in data that is the y axis of plot (Name of column y should be character (in quotes) and data in column y should be numeric)
+
+    @return ggplot2 scatter plot with of data points from column x and y and visualization of the fitted linear model with simple linear function as the title and adjusted r-squared and F-statistic as subtitle
+
     USAGE: plotLinearModel(data, x, y)
 
 The output is a ggplot object with data points from column x and y in

@@ -2,16 +2,16 @@
 % Please edit documentation in R/plotLinearModel.R
 \name{plotLinearModel}
 \alias{plotLinearModel}
-\title{Plots data with linear model}
+\title{Fit and visualize simple linear model on graph}
 \usage{
 plotLinearModel(data, x, y)
 }
 \arguments{
-\item{data}{Dataset in form of tibble that is being plotted (Must have at least three valid row)}
+\item{data}{Data set in form of tibble that is being plotted (Must have at least three valid row)}
 
-\item{x}{Column in data that is the x axis of plot (format of string)}
+\item{x}{Column in data that is the x axis of plot (Name of column X should be character (in quotes) and data in column x should be numeric)}
 
-\item{y}{Column in data that is the y axis of plot (format of string)}
+\item{y}{Column in data that is the y axis of plot (Name of column y should be character (in quotes) and data in column y should be numeric)}
 }
 \value{
 ggplot2 scatter plot with linear model and data points with linear
@@ -19,7 +19,9 @@ function as the title and adjusted r-squared and F-statistic as subtitle
 }
 \description{
 Plot quantitative data from column x and y in data in a scatter plot along with
-a linear model function of the two column.
+the line from the fitted simple linear model. The simple linear function is
+the graph title and the subtitle is correlation statistics
+(r-squared and F-statistic)
 }
 \examples{
 test_tibble <- tibble::tribble(

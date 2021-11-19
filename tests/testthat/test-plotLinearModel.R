@@ -102,3 +102,34 @@ test_that("Rows with NA are removed",{
   p2 <- plotLinearModel(test, 'x', 'y')
   expect_true(all.equal(p1, p2)) # ggplots objects before and after adding invalid rows are the same
 })
+
+# Test that error is raised when data is not a tibble
+test_that("Error raised when data not tibble",{
+  data_frame <- data.frame(
+    x = c(1, 2, 3, 4),
+    y = c(2, 3, 4, 1)
+    )
+
+  # Raise error when data is data.frame class rather than tibble
+  expect_s3_class(data_frame, "data.frame")
+  expect_error(
+    plotLinearModel(data_frame, 'x', 'y'),
+    "Data must be a tibble, it is data type data.frame"
+  )
+
+  # Raise error when data is character
+  expect_error(
+    plotLinearModel("data", 'x', 'y'),
+    "Data must be a tibble, it is data type character"
+  )
+
+  # Raise error when data is vector
+  expect_error(
+    plotLinearModel(3671283, 'x', 'y'),
+    "Data must be a tibble, it is data type numeric"
+  )
+
+})
+
+
+

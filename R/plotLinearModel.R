@@ -1,15 +1,17 @@
-#' Plots data with linear model
+#' Fit and visualize simple linear model on graph
 #'
 #' Plot quantitative data from column x and y in data in a scatter plot along with
-#' a linear model function of the two column.
+#' the line from the fitted simple linear model. The simple linear function is
+#' the graph title and the subtitle is correlation statistics
+#' (r-squared and F-statistic)
 #'
-#' @param data Dataset in form of tibble that is being plotted (Must have at least three valid row)
-#' @param x Column in data that is the x axis of plot (format of string)
-#' @param y Column in data that is the y axis of plot (format of string)
+#' @param data Data set in form of tibble that is being plotted (Must have at least three valid row)
+#' @param x Column in data that is the x axis of plot (Name of column X should be character (in quotes) and data in column x should be numeric)
+#' @param y Column in data that is the y axis of plot (Name of column y should be character (in quotes) and data in column y should be numeric)
 #'
 #'
-#' @return ggplot2 scatter plot with linear model and data points with linear
-#' function as the title and adjusted r-squared and F-statistic as subtitle
+#' @return ggplot2 scatter plot with linear model and data points (from column x and y )
+#' with simple linear function as the title and adjusted r-squared and F-statistic as subtitle
 #'
 #' @examples
 #' test_tibble <- tibble::tribble(
@@ -29,14 +31,17 @@
 #' )
 #' plotLinearModel(large_data, 'x1', 'y1')
 #'
+#' @example
+#' mtcars.tb <- tibble::as_tibble(mtcars)
+#' plotLinearModel(mt_car.tb, "mpg", "disp")
+#'
 #' @export
 plotLinearModel <- function(data, x, y) {
-  data <- tidyr::drop_na(data, x, y) # Drop rows with NA in column x or y
-
   # Check if data is a tibble
   if (!tibble::is_tibble(data)) {
-    stop("Data must be a tibble, it is data type ", class(data)[1])
+    stop("Data must be a tibble, it is data type ", class(data))
   }
+  data <- tidyr::drop_na(data, x, y) # Drop rows with NA in column x or y
 
   # Check if column x is numeric data type
   if (!sapply(data[,x], class) %in% c('double', 'integer', 'numeric')) {
@@ -47,7 +52,7 @@ plotLinearModel <- function(data, x, y) {
     stop(y,' column must be data type numeric, it is data type ', sapply(data[,y], class))
   }
 
-  # Check if data has at least three valid rows
+  # Check if data has at least three numeric rows (not including rows with NA)
   if (nrow(data) < 3) {
     stop("Data set must have at least three valid entries")
   }

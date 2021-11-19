@@ -10,7 +10,8 @@ Description: The goal of quickGraph is to create a functions that helps research
     quickly fit a model on a data set and visualize the data alongside the model. 
     Additionally the plot will provide basic statistics including the model function, 
     F-statistic and adjusted R-square. Currently, the quickGraph library only has 
-    one function, plotLinearModel, which fits and visualize simple linear model. 
+    one function, plotLinearModel, which fits and visualize simple linear model 
+    and provide correlational statistic.  
 License: MIT + file LICENSE
 Encoding: UTF-8
 LazyData: true
